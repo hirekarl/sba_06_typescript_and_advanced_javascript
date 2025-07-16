@@ -1,5 +1,6 @@
-import formatAsCurrency from "../utils/formatAsCurrency"
 import calculateDiscount from "../utils/discountCalculator"
+import calculateTax from "../utils/taxCalculator"
+import formatAsCurrency from "../utils/formatAsCurrency"
 
 class Product {
   private _id: number
@@ -10,6 +11,7 @@ class Product {
   private _discountPercentage: number
   private _images: string[]
   private _thumbnail: string
+  private _taxRate: number
 
   constructor(
     id: number,
@@ -29,6 +31,12 @@ class Product {
     this._discountPercentage = discountPercentage
     this._images = images
     this._thumbnail = thumbnail
+
+    if (this._category === "groceries") {
+      this._taxRate = 0.03
+    } else {
+      this._taxRate = 0.0475
+    }
   }
 
   get id(): number {
@@ -63,14 +71,24 @@ class Product {
     return this._thumbnail
   }
 
+  get taxRate(): number {
+    return this._taxRate
+  }
+
   displayDetails() {
     const details =
       `Name: ${this.title}\n` +
       `Description: ${this.description}\n` +
       `Category: ${this.category}\n` +
       `Price: ${formatAsCurrency(this.price)}\n` +
-      `Price with Discount (${this.discountPercentage}%): ${this.getPriceWithDiscount()}` +
-      `Images:\n${this.images.forEach((imageUrl) => "- " + imageUrl + "\n")}` +
+      `Discounted Price (${this.discountPercentage}%): ${formatAsCurrency(
+        this.getPriceWithDiscount()
+      )}\n` +
+      `Discounted Price with Tax (${this.taxRate * 100}%): ${formatAsCurrency(
+        this.getPriceWithDiscountAndTax()
+      )}\n` +
+      // `Images:\n${this.images.forEach((imageUrl) => "- " + imageUrl + "\n")}` +
+      `Images:\n${this.images.join("\n")}\n` +
       `Thumbnail: ${this.thumbnail}\n`
 
     console.log(`${details}\n`)
@@ -79,6 +97,14 @@ class Product {
   getPriceWithDiscount(): number {
     const discountAmount = calculateDiscount(this)
     return this.price - discountAmount
+  }
+
+  getTax(): number {
+    return calculateTax(this)
+  }
+
+  getPriceWithDiscountAndTax(): number {
+    return this.getPriceWithDiscount() + this.getTax()
   }
 }
 
