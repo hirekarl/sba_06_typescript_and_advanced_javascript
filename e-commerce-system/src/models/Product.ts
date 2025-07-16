@@ -1,4 +1,5 @@
 import formatAsCurrency from "../utils/formatAsCurrency"
+import calculateDiscount from "../utils/discountCalculator"
 
 class Product {
   private _id: number
@@ -68,15 +69,16 @@ class Product {
       `Description: ${this.description}\n` +
       `Category: ${this.category}\n` +
       `Price: ${formatAsCurrency(this.price)}\n` +
-      `Discount: ${this.discountPercentage}%\n` +
+      `Price with Discount (${this.discountPercentage}%): ${this.getPriceWithDiscount()}` +
       `Images:\n${this.images.forEach((imageUrl) => "- " + imageUrl + "\n")}` +
       `Thumbnail: ${this.thumbnail}\n`
 
     console.log(`${details}\n`)
   }
 
-  getPriceWithDiscount() {
-    /* TODO */
+  getPriceWithDiscount(): number {
+    const discountAmount = calculateDiscount(this)
+    return this.price - discountAmount
   }
 }
 

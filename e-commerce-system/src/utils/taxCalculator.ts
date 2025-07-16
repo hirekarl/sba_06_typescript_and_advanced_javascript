@@ -7,10 +7,10 @@ function productIsGroceries(product: Product): boolean {
   return product.category === "groceries"
 }
 
-function calculateTax(product: Product) {
+function calculateTax(product: Product): number {
   return productIsGroceries(product)
-    ? product.price * GROCERIES_TAX_RATE
-    : product.price * DEFAULT_TAX_RATE
+    ? product.getPriceWithDiscount() * GROCERIES_TAX_RATE
+    : product.getPriceWithDiscount() * DEFAULT_TAX_RATE
 }
 
 export default calculateTax
