@@ -2,6 +2,11 @@ import calculateDiscount from "../utils/discountCalculator"
 import calculateTax from "../utils/taxCalculator"
 import formatAsCurrency from "../utils/formatAsCurrency"
 
+const taxRate = {
+  DEFAULT: 0.0475,
+  GROCERIES: 0.03,
+} as const
+
 class Product {
   private _id: number
   private _title: string
@@ -32,11 +37,8 @@ class Product {
     this._images = images
     this._thumbnail = thumbnail
 
-    if (this._category === "groceries") {
-      this._taxRate = 0.03
-    } else {
-      this._taxRate = 0.0475
-    }
+    this._taxRate =
+      this._category !== "groceries" ? taxRate.DEFAULT : taxRate.GROCERIES
   }
 
   get id(): number {
