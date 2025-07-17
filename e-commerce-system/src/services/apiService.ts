@@ -1,5 +1,5 @@
 import Product from "../models/Product"
-import HTTPError from "../utils/errorHandler"
+import { HTTPError } from "../utils/errorHandler"
 
 const BASE_URL = "https://dummyjson.com/products"
 
@@ -47,12 +47,6 @@ function makeResponseProduct(data: Product): Product {
   )
 }
 
-function logError(error: Error, productId: number | undefined) {
-  console.error(
-    `[ERROR] ${error.name}: ${error.message} (Product with ID ${productId})\n`
-  )
-}
-
 async function getProductById(productId: number): Promise<Product | undefined> {
   try {
     const response = await dummyJSONAPIRequest.get(productId)
@@ -60,7 +54,7 @@ async function getProductById(productId: number): Promise<Product | undefined> {
     const data = await response.json()
     return makeResponseProduct(data)
   } catch (error) {
-    logError(error as Error, productId)
+    throw new Error(String(error))
   }
 }
 
@@ -71,7 +65,7 @@ async function addProduct(productToAdd: Product): Promise<Product | undefined> {
     const data = await response.json()
     return makeResponseProduct(data)
   } catch (error) {
-    logError(error as Error, productToAdd.id)
+    throw new Error(String(error))
   }
 }
 
@@ -85,7 +79,7 @@ async function editProduct(
     const data = await response.json()
     return makeResponseProduct(data)
   } catch (error) {
-    logError(error as Error, productId)
+    throw new Error(String(error))
   }
 }
 
@@ -96,7 +90,7 @@ async function deleteProduct(productId: number): Promise<Product | undefined> {
     const data = await response.json()
     return makeResponseProduct(data)
   } catch (error) {
-    logError(error as Error, productId)
+    throw new Error(String(error))
   }
 }
 

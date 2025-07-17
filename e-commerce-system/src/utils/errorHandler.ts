@@ -5,4 +5,10 @@ class HTTPError extends Error {
   }
 }
 
-export default HTTPError
+function logError(error: Error, productId: number | undefined) {
+  console.error(
+    `[ERROR] ${error.message} (Product with ID ${productId})\n`
+  )
+}
+
+export { HTTPError, logError }
