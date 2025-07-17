@@ -30,6 +30,9 @@ async function main(): Promise<void> {
   console.log("----------------------------------")
   const product2 = await getProductById(MAX_PRODUCT_ID + 1)
   if (product2) {
+    console.info(
+      `[INFO] This line shouldn't print, because ID ${MAX_PRODUCT_ID} doesn't exist.`
+    )
     product2.displayDetails()
   }
 
