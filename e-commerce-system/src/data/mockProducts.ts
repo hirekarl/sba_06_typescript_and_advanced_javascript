@@ -7,11 +7,11 @@ const MAX_RANDOM_DISCOUNT_PERCENTAGE = 50
 
 
 function randomPrice(): number {
-  return Math.random() * MAX_RANDOM_PRICE
+  return parseFloat((Math.random() * MAX_RANDOM_PRICE).toFixed(2))
 }
 
 function randomDiscountPercentage(): number {
-  return Math.random() * MAX_RANDOM_DISCOUNT_PERCENTAGE
+  return parseFloat((Math.random() * MAX_RANDOM_DISCOUNT_PERCENTAGE).toFixed(2))
 }
 
 const mockProduct1 = new Product(
