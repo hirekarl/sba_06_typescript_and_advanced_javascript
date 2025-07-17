@@ -1,8 +1,8 @@
-class CustomError extends Error {
+class HTTPError extends Error {
   constructor(message: string) {
     super(message)
-    this.name = "CustomError"
+    this.name = "HTTPError"
   }
 }
 
-export default CustomError
+export default HTTPError
