@@ -47,12 +47,12 @@ class Product {
       `Description: ${this.description}\n` +
       `Category: ${this.category}\n` +
       `Price: ${formatAsCurrency(this.price)}\n` +
-      `Discounted Price (${this.discountPercentage.toFixed(
-        2
-      )}% off): ${formatAsCurrency(this.getPriceWithDiscount())}\n` +
-      `Discounted Price with Tax (${(this.taxRate * 100).toFixed(
-        2
-      )}%): ${formatAsCurrency(this.getPriceWithDiscountAndTax())}\n` +
+      `Discounted Price (${this.discountPercentage}% off): ${formatAsCurrency(
+        this.getPriceWithDiscount()
+      )}\n` +
+      `Discounted Price with Tax (${this.taxRate * 100}%): ${formatAsCurrency(
+        this.getPriceWithDiscountAndTax()
+      )}\n` +
       `Images: ${this.images.join(", ")}\n` +
       `Thumbnail: ${this.thumbnail}\n`
 
