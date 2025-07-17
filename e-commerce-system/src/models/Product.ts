@@ -8,15 +8,15 @@ const taxRate = {
 } as const
 
 class Product {
-  title: string
-  description: string
-  category: string
-  price: number
-  discountPercentage: number
-  images: string[]
-  thumbnail: string
-  taxRate: number
-  id?: number
+  readonly title: string
+  readonly description: string
+  readonly category: string
+  readonly price: number
+  readonly discountPercentage: number
+  readonly images: string[]
+  readonly thumbnail: string
+  readonly id?: number
+  readonly taxRate: number
 
   constructor(
     title: string,
@@ -60,8 +60,7 @@ class Product {
   }
 
   getPriceWithDiscount(): number {
-    const discountAmount = calculateDiscount(this)
-    return this.price - discountAmount
+    return this.price - calculateDiscount(this)
   }
 
   getTax(): number {
