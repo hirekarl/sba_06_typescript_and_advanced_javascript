@@ -1,4 +1,4 @@
-# SBA 5: TypeScript and Advanced JavaScript
+# SBA 6: TypeScript and Advanced JavaScript
 
 [Karl Johnson](https://github.com/hirekarl)  
 2025-RTT-30  
