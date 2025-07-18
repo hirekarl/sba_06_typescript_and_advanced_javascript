@@ -47,7 +47,7 @@ function makeResponseProduct(data: Product): Product {
   )
 }
 
-async function getProductById(productId: number): Promise<Product | undefined> {
+async function getProductById(productId: number): Promise<Product> {
   try {
     const response = await dummyJSONAPIRequest.get(productId)
     checkResponseStatus(response)
@@ -58,7 +58,7 @@ async function getProductById(productId: number): Promise<Product | undefined> {
   }
 }
 
-async function addProduct(productToAdd: Product): Promise<Product | undefined> {
+async function addProduct(productToAdd: Product): Promise<Product> {
   try {
     const response = await dummyJSONAPIRequest.post(productToAdd)
     checkResponseStatus(response)
@@ -72,7 +72,7 @@ async function addProduct(productToAdd: Product): Promise<Product | undefined> {
 async function editProduct(
   productId: number,
   editedProduct: Product
-): Promise<Product | undefined> {
+): Promise<Product> {
   try {
     const response = await dummyJSONAPIRequest.put(productId, editedProduct)
     checkResponseStatus(response)
@@ -83,7 +83,7 @@ async function editProduct(
   }
 }
 
-async function deleteProduct(productId: number): Promise<Product | undefined> {
+async function deleteProduct(productId: number): Promise<Product> {
   try {
     const response = await dummyJSONAPIRequest.delete(productId)
     checkResponseStatus(response)
